@@ -59,6 +59,8 @@ class Scoreboard
 {
   private:
     char quarter;
+    int down,
+        yardsToGo;
   //bool poss; //true = home, false = visitor
   //  Team team1; //double dot notation to get its data
   //  Team team2; //double dot notation to get its data
@@ -68,6 +70,8 @@ class Scoreboard
     Scoreboard()      // defualt constructor
     {
       quarter = '1';
+      down = 1;
+      yardsToGo = 10;
       //poss = true; //home team has the ball intially
     }
 
@@ -75,6 +79,10 @@ class Scoreboard
     { quarter = q; }
     //void setPoss(bool po)
     //{ poss = po; }
+    void setDown (int d)
+    { down = d; }
+    void setYardsToGo (int yard)
+    { yardsToGo = yard; }
     void setTeam1(Team t1)
     { team1 = t1; }
     void setTeam2(Team t2)
@@ -84,6 +92,10 @@ class Scoreboard
     { return quarter; }
     //bool getPoss() const
     //{ return poss; }
+    int getDown() const
+    { return down; }
+    int getYardsToGo() const
+    { return yardsToGo; }
     Team getTeam1() const
     { return team1; }
     Team getTeam2() const
@@ -100,6 +112,8 @@ class Scoreboard
         cout << team2.getName() << endl;
         cout << "Score: " << team2.getScore() << endl;
         cout << "Timeouts: " << team2.getTimeoutCount() << endl << endl;
+        cout << "Down: " << down << endl;
+        cout << "Yards-To-Go: " << yardsToGo << endl;
         cout << "Quarter: " << quarter << endl << endl;
 
         //dealing with Boolean data
@@ -124,6 +138,8 @@ void scoreboardControls(Scoreboard &sData)
   char newQuarter;
   int newScore = 0;
   int newTimeouts = 0;
+  int newDown = 0;
+  int newYardsToGo = 0;
   string newName,
          newCity,
          newCoach;
@@ -140,7 +156,9 @@ void scoreboardControls(Scoreboard &sData)
         cout << "2. Update Home Team Timeouts" << endl;
         cout << "3. Update Away Team Score" << endl;
         cout << "4. Update Away Team Timeouts" << endl;
-        cout << "5. Update Quarter" << endl << endl;
+        cout << "5. Update Down" << endl;
+        cout << "6. Update Yards-To-Go" << endl;
+        cout << "7. Update Quarter" << endl << endl;
         cout << "X. Exit" << endl << endl;
         cout << "Enter choice: ";
         cin >> decision;
@@ -190,6 +208,20 @@ void scoreboardControls(Scoreboard &sData)
           sData.team2.setTimeoutCount(newTimeouts);
         }
         else if (decision == '5')
+        {
+          cout << "Down Update \n";
+          cout << "New down: ";
+          cin >> newDown;
+          sData.setDown(newDown);
+        }
+        else if (decision == '6')
+        {
+          cout << "Yards-To-Go Update \n";
+          cout << "New Yards-To-Go: ";
+          cin >> newYardsToGo;
+          sData.setYardsToGo(newYardsToGo);
+        }
+        else if (decision == '7')
         {
           cout << "Quarter Update \n";
           cout << "New quarter: ";
